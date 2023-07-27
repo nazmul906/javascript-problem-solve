@@ -1,24 +1,21 @@
-function SumOfTarget(arr, target) {
-    let left = 0;
-    let right = arr.length - 1;
-  
-    while (left < right) {
-      const sum = arr[left] + arr[right];
-  
-      if (sum === target) {
-        return [left, right]; 
-      } else if (sum < target) {
-        left++; 
-      } else {
-        right--; 
-      }
+
+function findTwoNumbersWithSum(arr, target) {
+  const numMap = new Map();
+
+  for (let i = 0; i < arr.length; i++) {
+    const complement = target - arr[i];
+
+    if (numMap.has(complement)) {
+      return [numMap.get(complement), i];
     }
-  
-    return null; // If no pair is found, return null
+
+    numMap.set(arr[i], i);
   }
 
-  const sortedArray = [1, 3, 6, 8, 11, 15];
-  const target= 9;
-  const result = SumOfTarget(sortedArray, target);
-  console.log("Indices of two numbers with the sum :", result);
-  
+  return null; 
+}
+
+const numbers = [1, 3, 6, 8, 11, 15]
+const target = 9;
+const result = findTwoNumbersWithSum(numbers, target);
+console.log("Indices of two numbers with the sum:", result);
